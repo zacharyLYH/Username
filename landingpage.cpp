@@ -2,9 +2,9 @@
 #include "Header.h"
 using namespace std;
 
-int clauseSummer(Header v){
+int clauseSummer(Header v, int j){//Takes a Header object and the number of names to sum
     int ret = 0;
-    for(int i = 0; i <= 3; i++){
+    for(int i = 0; i <= j-1; i++){
         ret += v.clause[i];
     }
     return ret;
@@ -43,6 +43,7 @@ int main(int argc, char const *argv[])
     string last;
     string middle;
     string suffix;
+    int NumOfClauses = 0;
     getInputs(first, last, middle, suffix);
     cout<< "\n\n" ;
     cout << "\t===============================" <<endl;
@@ -56,11 +57,12 @@ int main(int argc, char const *argv[])
     }else{
         string space = " ";
         cout<< "Good name given" <<endl;
-        cout<< "The entered name: "<< first+space+ last+space+ middle+space+ suffix+space << endl;//TESTING
+        cout<< "The entered name: "<< first+space+ last+space+ middle+space+ suffix+space << endl;//fails when middle is empty but suffix is filled
         cout << "\t===============================" <<endl;
         cout << "\t     Generating a username     " <<endl;
         cout << "\t===============================" <<endl;
         v.clauseCounter(first, last, middle, suffix);
+        NumOfClauses = clauseSummer(v,4);
     }
 
     
