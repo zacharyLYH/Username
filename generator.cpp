@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Header.h"
 using namespace std;
 
@@ -37,6 +38,7 @@ void Header::clauseCounter(string first, string last, string middle, string suff
     }
 }
 
-// string Header::twoClause(string first, string last){
+string Header::twoClause(string first, string last){
 
-// }
+
+}

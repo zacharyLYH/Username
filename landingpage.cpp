@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "Header.h"
 using namespace std;
 
@@ -13,6 +14,11 @@ int clauseSummer(Header v, int j){//Takes a Header object and the number of name
 void getInputs(string &first, string &last, string &middle, string &suffix){
     cout << "First name: " ;
     getline(cin, first);
+    if(first == "admin"){
+        Header v;
+        //go into admin functions
+        exit;//exists program 
+    }
     cout << "Last name: " ;
     getline(cin, last);
     int yesNo;
@@ -36,14 +42,13 @@ void getInputs(string &first, string &last, string &middle, string &suffix){
     }
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
+
     cout << "\t===============================" <<endl;
     string first;
     string last;
     string middle;
     string suffix;
-    int NumOfClauses = 0;
     getInputs(first, last, middle, suffix);
     cout<< "\n\n" ;
     cout << "\t===============================" <<endl;
@@ -62,7 +67,7 @@ int main(int argc, char const *argv[])
         cout << "\t     Generating a username     " <<endl;
         cout << "\t===============================" <<endl;
         v.clauseCounter(first, last, middle, suffix);
-        NumOfClauses = clauseSummer(v,4);
+        v.sumOfClause = clauseSummer(v,4);
     }
 
     
