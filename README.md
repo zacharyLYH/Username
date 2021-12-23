@@ -7,8 +7,8 @@ Suite to test functionality of
 - clauseCounter
 
 generator.cpp:
--clauseCounter : Takes a well-formed name and counts the number of clauses in the name. For example : Muhammad Ali is a 2 clause name, John H. Smith is a 3 clause name, John H. Smith Jr. is a 4 clause name, Cheng Xiu Wen is a 3 clause name. The resulting number of clauses is stored for use of processing in username formation operations.
--twoClause : Takes a two clause name, such as John Smith and Jeremy Chan, and generates usernames. 
+1) clauseCounter : Takes a well-formed name and counts the number of clauses in the name. For example : Muhammad Ali is a 2 clause name, John H. Smith is a 3 clause name, John H. Smith Jr. is a 4 clause name, Cheng Xiu Wen is a 3 clause name. The resulting number of clauses is stored for use of processing in username formation operations.
+2) twoClause : Takes a two clause name, such as John Smith and Jeremy Chan, and generates usernames. 
 
 landingpage.cpp:
 Generates a user interface that connects to the backend. This takes an First, Last, Middle and Suffix name (where applicable) and returns a username. A user may accept or reject a generated username. Upon acceptance, the program terminates. Upon rejection, the program regenerates usernames until satisfaction.
