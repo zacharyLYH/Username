@@ -69,6 +69,12 @@ int main(int argc, char const *argv[]){
         v.clauseCounter(first, last, middle, suffix);
         v.sumOfClause = clauseSummer(v,4);
     }
+    if(clauseSummer(v,2) == 2 && middle == "" && suffix == ""){
+        v.twoClause(first, last);
+    }else if(clauseSummer(v,3) && middle == "" && suffix == ""){
 
+    }else if(clauseSummer(v,3) && middle != "" && suffix == ""){
+
+    }
     
 }

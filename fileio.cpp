@@ -9,8 +9,8 @@ void Header::read(string &readTo){
 
 }
 
-void Header::read(string &readTo, string checkExistUsername){
-    
+bool Header::checkExist(string checkExistUsername){
+
 }
 
 void Header::write(string username, string name){//need to add more logic
