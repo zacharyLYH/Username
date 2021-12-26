@@ -39,37 +39,57 @@ void Header::clauseCounter(string first, string last, string middle, string suff
 }
 
 string Header::twoClause(string first, string last){
+    string givenName = first + " " + last;
     int j = 7;
     string ret;
-    bool satisfied = false;
-    while(!satisfied){
-        if(first.size() >= 8){//use first name predominantly
-            for(int i = 0; i <= 7; i++){
+    if(first.size() >= 8){//use first name predominantly
+        for(int i = 0; i <= 7; i++){
+          ret[i] = first[i];
+        }
+        if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+          return ret;  
+        }
+        for(int i = 0; i <= 7; i++){
+          ret[j] = last[i];
+          j--;
+          if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            break;
+            return ret;  
+          }
+        }
+    }else if(last.size() >= 8){//use last name predominantly
+        ret = first;
+        for(int i = 0; i <= last.size() && ret.size() != 8 ; i++){
+            ret += last[i];
+        }
+        if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+          return ret;  
+        }
+        for(int i = 0; i <= 7; i++){
+          for(int j = 0; j <= i; j++){
+            ret[i] = first[j];
+          }
+          ret[i] = last[j];
+          if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            break;
+            return ret;  
+          }
+        }
+    }
+      int counter = first.size();
+      while(counter != 0){
+          for(int i = 0; i <= 7; i++){
+            if(i == counter){
+              ret[i] = last[i];
+            }else{
               ret[i] = first[i];
             }
-            if(checkExist(ret) == true){
-              //send to user 
-              return ret;
-            }
-            for(int i = 0; i <= 7; i++){
-              ret[j] = last[i];
-              j--;
-              if(checkExist(ret) == true){
-                //send to user 
-                return ret;
-              }
-            }
-        }else if(last.size() >= 8){//use last name predominantly
-            ret = first;
-            for(int i = 0; i <= last.size() && ret.size() != 8 ; i++){
-                ret += last[i];
-            }
-            if(checkExist(ret) == true){
-              //send to user 
-              return ret;
-            }
-            for(int i = 0; i <= 7; i++){
-            }
-        }      
-    }
+          }
+          if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            break;
+            return ret;  
+        }
+        counter--;
+      }
+      //contact admin for manual name generation             
 }

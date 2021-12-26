@@ -1,16 +1,16 @@
 #include <fstream>
 #include "Header.h"
 
-void Header::read(string &readTo){
+bool Header::checkExist(string checkExistUsername){
+	string line;
     fstream my_file;
 	my_file.open("my_file.txt", ios::in);
-    //
-	my_file.close();
-
-}
-
-bool Header::checkExist(string checkExistUsername){
-
+	while(getline(my_file, line)){
+		if(line == checkExistUsername){
+			return false;
+		}
+	}
+	return true;
 }
 
 void Header::write(string username, string name){//need to add more logic

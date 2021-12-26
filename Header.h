@@ -6,7 +6,6 @@ class Header{
     public :
         int sumOfClause; 
         void write(string username, string name);
-        void read(string &readTo);
         bool checkExist(string checkExistsUsername);//for admin uses
         int clause[4] = {1,1,0,0};
         int takeName(std::string first, std::string last, std::string  middle, std::string suffix);
@@ -17,6 +16,6 @@ class Header{
         void storeNum(int number, int i) {
             clause[i] = number;
         }
-        
+        bool sendtoUser(string username, string givenName);
 
 };
