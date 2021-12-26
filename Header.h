@@ -9,13 +9,12 @@ class Header{
         bool checkExist(string checkExistsUsername);//for admin uses
         int clause[4] = {1,1,0,0};
         int takeName(std::string first, std::string last, std::string  middle, std::string suffix);
-        std::string twoClause(std::string first, std::string last);
-        std::string twoClause(std::string first, std::string last, string middle);
-        std::string twoClause(std::string first, std::string last, string middle, string suffix);
+        void twoClause(std::string first, std::string last);
+        void twoClause(std::string first, std::string last, string middle);
+        void twoClause(std::string first, std::string last, string middle, string suffix);
         void clauseCounter(std::string first, std::string last, std::string  middle, std::string suffix);
         void storeNum(int number, int i) {
             clause[i] = number;
         }
         bool sendtoUser(string username, string givenName);
-
 };

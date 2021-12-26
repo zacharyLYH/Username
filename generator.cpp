@@ -38,32 +38,35 @@ void Header::clauseCounter(string first, string last, string middle, string suff
     }
 }
 
-string Header::twoClause(string first, string last){
+void Header::twoClause(string first, string last){
     string givenName = first + " " + last;
     int j = 7;
-    string ret;
+    string ret = "aaaaaaaa";
     if(first.size() >= 8){//use first name predominantly
         for(int i = 0; i <= 7; i++){
           ret[i] = first[i];
         }
         if(checkExist(ret) == true && sendtoUser(ret, givenName)){
-          return ret;  
+          write(ret, givenName);
+          return;  
         }
         for(int i = 0; i <= 7; i++){
           ret[j] = last[i];
           j--;
           if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            write(ret, givenName);
             break;
-            return ret;  
+            return;  
           }
         }
     }else if(last.size() >= 8){//use last name predominantly
         ret = first;
         for(int i = 0; i <= last.size() && ret.size() != 8 ; i++){
-            ret += last[i];
+            ret = last[i];
         }
         if(checkExist(ret) == true && sendtoUser(ret, givenName)){
-          return ret;  
+          write(ret, givenName);
+          return;  
         }
         for(int i = 0; i <= 7; i++){
           for(int j = 0; j <= i; j++){
@@ -71,25 +74,33 @@ string Header::twoClause(string first, string last){
           }
           ret[i] = last[j];
           if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            write(ret, givenName);
             break;
-            return ret;  
+            return;  
           }
         }
     }
-      int counter = first.size();
-      while(counter != 0){
-          for(int i = 0; i <= 7; i++){
-            if(i == counter){
-              ret[i] = last[i];
+      int firstSize = first.size()-1;
+      int lastSize = last.size();
+      int lastTraverser = 0;
+      while(lastSize != 0){
+          for(int i = 0; i <= 7; i++){//fill up to first size only. 
+            if(i <= firstSize){
+                ret[i] = first[i];
             }else{
-              ret[i] = first[i];
-            }
+                ret[i] = last[lastTraverser];
+                lastTraverser++;
+            }          
           }
           if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            write(ret, givenName);
             break;
-            return ret;  
-        }
-        counter--;
+            return;
+          }
+        lastTraverser = 0;
+        firstSize--;
+        lastSize--;
       }
-      //contact admin for manual name generation             
+      cout<<"\n\nHello there, it seems like we're having trouble assigning you a username at this moment."<<endl;
+      cout<<"An admin with admin functions will assist you"<<endl;
 }

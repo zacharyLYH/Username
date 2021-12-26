@@ -57,5 +57,10 @@ int main(int argc, char const *argv[])
         }
     }
     cout<<"Passed"<<endl;
+
+    Header v4;
+    v4.twoClause(first, last);
+    cout<<"Passed"<<endl;
+
     return 0;
 }
