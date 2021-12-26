@@ -10,8 +10,8 @@ class Header{
         int clause[4] = {1,1,0,0};
         int takeName(std::string first, std::string last, std::string  middle, std::string suffix);
         void twoClause(std::string first, std::string last);
-        void twoClause(std::string first, std::string last, string middle);
-        void twoClause(std::string first, std::string last, string middle, string suffix);
+        void threeClause(std::string first, std::string last, string middle);
+        void fourClause(std::string first, std::string last, string middle, string suffix);
         void clauseCounter(std::string first, std::string last, std::string  middle, std::string suffix);
         void storeNum(int number, int i) {
             clause[i] = number;

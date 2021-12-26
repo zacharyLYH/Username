@@ -69,11 +69,23 @@ int main(int argc, char const *argv[]){
         v.clauseCounter(first, last, middle, suffix);
         v.sumOfClause = clauseSummer(v,4);
     }
-    if(clauseSummer(v,2) == 2 && middle == "" && suffix == ""){
+    if(clauseSummer(v,2) == 2 && middle == "" && suffix == ""){//Zachary Lee
         v.twoClause(first, last);
-    }else if(clauseSummer(v,3) && middle == "" && suffix == ""){
+    }else if(clauseSummer(v,2) == 3 && middle == "" && suffix == ""){//Lee Yi Hong
+        string newFirst;
+        for(int i = 0; i <= first.size() ; i++){
+            if(newFirst == " "){
+                //skip
+            }else{
+                newFirst += first[i];
+            }
+        }
+        v.twoClause(newFirst,last);
+    }else if(clauseSummer(v,3) == 3 && middle != "" && suffix == ""){//John H. Smith
 
-    }else if(clauseSummer(v,3) && middle != "" && suffix == ""){
+    }else if(clauseSummer(v,3) == 3 && middle == "" && suffix != ""){//John Smith Jr.
+
+    }else if(clauseSummer(v,3) == 4 && middle != "" && suffix != ""){//John H. Smith Jr.
 
     }
     
