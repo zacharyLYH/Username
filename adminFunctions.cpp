@@ -46,6 +46,7 @@ int deleteUsername(Header v, string username){
     if(v.checkExist(username) == true){
 
     }
+    return 0;
 }
 
 void Header::admin(){

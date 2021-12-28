@@ -57,10 +57,10 @@ int main(int argc, char const *argv[])
         }
     }
     cout<<"Passed"<<endl;
-    first = "Zachary";
+    first = "YiHong";
     last = "Lee";
     Header v4;
-    v4.twoClause(first , last);
+    v4.twoClause(first , last, false);
     cout<<"Passed"<<endl;
 
     return 0;

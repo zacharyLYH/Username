@@ -1,8 +1,8 @@
-username: adminFunctions.o fileio.o generator.o landingpage.o sendToUser.o verifyName.o receipt.o
-	g++ adminFunctions.o fileio.o generator.o landingpage.o sendToUser.o verifyName.o receipt.o -o username
+# username: adminFunctions.o fileio.o generator.o landingpage.o sendToUser.o verifyName.o receipt.o
+# 	g++ adminFunctions.o fileio.o generator.o landingpage.o sendToUser.o verifyName.o receipt.o -o username
 
-# tester: adminFunctions.o fileio.o generator.o sendToUser.o verifyName.o tester.o receipt.o
-# 	g++ adminFunctions.o fileio.o generator.o sendToUser.o verifyName.o tester.o receipt.o -o tester
+tester: adminFunctions.o fileio.o generator.o sendToUser.o verifyName.o tester.o receipt.o
+	g++ adminFunctions.o fileio.o generator.o sendToUser.o verifyName.o tester.o receipt.o -o tester
 
 adminFunctions.o: adminFunctions.cpp
 	g++ -c -g adminFunctions.cpp

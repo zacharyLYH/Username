@@ -17,7 +17,7 @@ void errormsg(){
       cout<<"An admin with admin functions will assist you"<<endl;
 }
 
-bool validateGeneratedUsername(string usr){
+bool validateGeneratedUsernames(string usr){
       int validate = 0;
       for(int i = 0; i <= 7; i++){
         if(isalpha(usr[i])){
@@ -65,11 +65,11 @@ void Header::clauseCounter(string first, string last, string middle, string suff
     }
 }
 
-void Header::twoClause(string first, string last){
+void Header::twoClause(string first, string last, bool cameFromOthers){
     string givenName = first + " " + last;
     string ret = "aaaaaaaa";
     bool success = false;
-    if(last.size() >= 8){//use last name predominantly
+    if(last.size() + first.size() >= 8){//DEBUG WHAT IS FIRST AND LAST FOR LAST NAME DOMINATE
         int firstSize = first.size()-1;
         int lastSize = last.size();
         int firstTraverser = 0;
@@ -82,10 +82,12 @@ void Header::twoClause(string first, string last){
                   firstTraverser++;
               }          
             }
-            if(!validateGeneratedUsername(ret)){
+            cout<<"first: "<<ret<<endl;
+            if(!validateGeneratedUsernames(ret)){
               break;
               return;
             }
+            cout<<"first"<<endl;
             if(checkExist(ret) == true && sendtoUser(ret, givenName)){
               write(ret, givenName);
               receipt(ret, givenName);
@@ -97,7 +99,37 @@ void Header::twoClause(string first, string last){
           firstSize--;
           lastSize--;
         }
-    }else if(givenName.size()-1<= 7){
+        int firstSize2 = first.size()-1;
+        int lastSize2 = last.size();
+        int lastTraverser = 0;
+        while(lastSize2 != 0 || !success){
+            for(int i = 0; i <= 7; i++){//fill up to first size only. 
+              if(i <= firstSize2){
+                  ret[i] = first[i];
+              }else{
+                  if(lastTraverser <= last.size()){
+                      ret[i] = last[lastTraverser];
+                      lastTraverser++;
+                  }
+              }          
+            }
+            if(!validateGeneratedUsernames(ret)){
+              break;
+              return;
+            }
+            cout<<"second"<<endl;
+            if(checkExist(ret) == true && sendtoUser(ret, givenName)){            
+              write(ret, givenName);
+              receipt(ret, givenName);
+              success = true;
+              break;
+              return;
+            }
+          lastTraverser = 0;
+          firstSize--;
+          lastSize2--;
+        }
+      }else if(givenName.size()-1<= 7){
         int missing = 8 - givenName.size();
         string date[3];
         string input;
@@ -139,7 +171,7 @@ void Header::twoClause(string first, string last){
             }else{
 
             }
-            if(!validateGeneratedUsername(ret)){
+            if(!validateGeneratedUsernames(ret)){
               break;
               return;
             }
@@ -152,38 +184,20 @@ void Header::twoClause(string first, string last){
             }
             j--;
         }
-    }else{
-        int firstSize = first.size()-1;
-        int lastSize = last.size();
-        int lastTraverser = 0;
-        while(lastSize != 0 || !success){
-            for(int i = 0; i <= 7; i++){//fill up to first size only. 
-              if(i <= firstSize){
-                  ret[i] = first[i];
-              }else{
-                  if(lastTraverser <= last.size()){
-                      ret[i] = last[lastTraverser];
-                      lastTraverser++;
-                  }
-              }          
-            }
-            if(!validateGeneratedUsername(ret)){
-              break;
-              return;
-            }
-            if(checkExist(ret) == true && sendtoUser(ret, givenName)){            
-              write(ret, givenName);
-              receipt(ret, givenName);
-              success = true;
-              break;
-              return;
-            }
-          lastTraverser = 0;
-          firstSize--;
-          lastSize--;
-        }
-    }
-    if(!success){
-        errormsg();   
+      }
+    if(!success && cameFromOthers == false){
+        errormsg();
     } 
+}
+
+void Header::threeClause(string first, string last, string middle){
+    twoClause(first, last, true);
+    string givenName = first + " " + last + " " + middle;
+    string ret = "aaaaaaaa";
+    bool success = false;
+    if(givenName.length()-2 >= 8){
+
+    }else if(givenName.length()-2 <= 8){
+
+    }
 }

@@ -1,4 +1,5 @@
 #include <fstream>
+#include <algorithm>
 #include "Header.h"
 
 bool Header::checkExist(string checkExistUsername){
@@ -32,10 +33,11 @@ string Header::returnUsername(string name){
 	return temp;
 }
 
-void Header::write(string username, string name){//need to add more logic
+void Header::write(string username, string name){
     fstream my_file;
-	string line;
+	transform(username.begin(), username.end(), username.begin(), ::tolower);
+	transform(name.begin(), name.end(), name.begin(), ::tolower);
 	my_file.open("my_file.txt", ios::app);	
-	my_file << username <<" - "<<name<<endl;//SET TO LOWER CASE
+	my_file << username <<" - "<<name<<endl;
 	my_file.close();
 }

@@ -57,18 +57,17 @@ int main(int argc, char const *argv[]){
     string middle;
     string suffix;
     getInputs(first, last, middle, suffix);
-    cout<< "\n\n" ;
     cout << "\t===============================" <<endl;
     cout << "\tChecking if name is well formed " <<endl;
     cout << "\t===============================" <<endl;
     Header v;
     int result = v.takeName(first,last,middle,suffix);
     if(result == 1){
-        cout << "Bad name given" << endl;
+        cout << "Name status ---------- Bad" << endl;
         return 0;
     }else{
         string space = " ";
-        cout<< "Good name given" <<endl;
+        cout<< "Name status ---------- Good" <<endl;
         cout<< "The entered name: "<< first+space+ last+space+ middle+space+ suffix+space << endl;//fails when middle is empty but suffix is filled
         cout << "\t===============================" <<endl;
         cout << "\t     Generating a username     " <<endl;
@@ -77,23 +76,14 @@ int main(int argc, char const *argv[]){
         v.sumOfClause = clauseSummer(v,4);
     }
     first = removeSpace(first);
-    cout<<first<<endl;
     last = removeSpace(last);
-    cout<<last<<endl;
     if(clauseSummer(v,2) == 2 && middle == "" && suffix == ""){//Zachary Lee       
-        v.twoClause(first, last);
+        v.twoClause(first, last, false);
     }else if(clauseSummer(v,2) == 3 && middle == "" && suffix == ""){//Lee Yi Hong
-        string newFirst;
-        for(int i = 0; i <= first.size() ; i++){
-            if(newFirst == " "){
-                //skip
-            }else{
-                newFirst += first[i];
-            }
-        }
-        v.twoClause(newFirst,last);
+        remove(first.begin(), first.end(), ' ');
+        v.twoClause(first, last, false);
     }else if(clauseSummer(v,3) == 3 && middle != "" && suffix == ""){//John H. Smith
-
+        v.threeClause(first, last, middle);
     }else if(clauseSummer(v,3) == 3 && middle == "" && suffix != ""){//John Smith Jr.
 
     }else if(clauseSummer(v,3) == 4 && middle != "" && suffix != ""){//John H. Smith Jr.
