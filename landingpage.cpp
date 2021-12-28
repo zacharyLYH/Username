@@ -1,7 +1,14 @@
 #include <iostream>
 #include <stdlib.h>
+#include <algorithm>
 #include "Header.h"
 using namespace std;
+
+string removeSpace(string name){
+    string ret = name;
+    ret.erase(remove(ret.begin(), ret.end(), ' '), ret.end());
+    return ret;
+}
 
 int clauseSummer(Header v, int j){//Takes a Header object and the number of names to sum
     int ret = 0;
@@ -16,7 +23,7 @@ void getInputs(string &first, string &last, string &middle, string &suffix){
     getline(cin, first);
     if(first == "admin"){
         Header v;
-        //go into admin functions
+        v.admin();
         exit;//exists program 
     }
     cout << "Last name: " ;
@@ -69,7 +76,11 @@ int main(int argc, char const *argv[]){
         v.clauseCounter(first, last, middle, suffix);
         v.sumOfClause = clauseSummer(v,4);
     }
-    if(clauseSummer(v,2) == 2 && middle == "" && suffix == ""){//Zachary Lee
+    first = removeSpace(first);
+    cout<<first<<endl;
+    last = removeSpace(last);
+    cout<<last<<endl;
+    if(clauseSummer(v,2) == 2 && middle == "" && suffix == ""){//Zachary Lee       
         v.twoClause(first, last);
     }else if(clauseSummer(v,2) == 3 && middle == "" && suffix == ""){//Lee Yi Hong
         string newFirst;

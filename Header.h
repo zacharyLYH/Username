@@ -17,4 +17,7 @@ class Header{
             clause[i] = number;
         }
         bool sendtoUser(string username, string givenName);
+        void receipt(string username, string name);
+        void admin();
+        string returnUsername(string name);
 };

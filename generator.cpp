@@ -12,6 +12,24 @@ int count_digit(int number) {
    return count;
 }
 
+void errormsg(){
+      cout<<"\n\nHello there, it seems like we're having trouble assigning you a username at this moment."<<endl;
+      cout<<"An admin with admin functions will assist you"<<endl;
+}
+
+bool validateGeneratedUsername(string usr){
+      int validate = 0;
+      for(int i = 0; i <= 7; i++){
+        if(isalpha(usr[i])){
+            validate++;
+        }
+      }
+      if(validate != 8){
+        return false;
+      }
+      return true;
+}
+
 void Header::clauseCounter(string first, string last, string middle, string suffix){
     int ffirst = 1;
     int llast = 1;
@@ -50,11 +68,12 @@ void Header::clauseCounter(string first, string last, string middle, string suff
 void Header::twoClause(string first, string last){
     string givenName = first + " " + last;
     string ret = "aaaaaaaa";
+    bool success = false;
     if(last.size() >= 8){//use last name predominantly
         int firstSize = first.size()-1;
         int lastSize = last.size();
         int firstTraverser = 0;
-        while(firstSize != 0){
+        while(firstSize != 0 || !success){
             for(int i = 0; i <= 7; i++){
               if(i <= lastSize){
                   ret[i] = last[i];
@@ -63,8 +82,14 @@ void Header::twoClause(string first, string last){
                   firstTraverser++;
               }          
             }
+            if(!validateGeneratedUsername(ret)){
+              break;
+              return;
+            }
             if(checkExist(ret) == true && sendtoUser(ret, givenName)){
               write(ret, givenName);
+              receipt(ret, givenName);
+              success = true;
               break;
               return;
             }
@@ -92,7 +117,7 @@ void Header::twoClause(string first, string last){
         }
         ret += first + last;
         //BIRTHDATE CONFIG NOT NEARLY VERSATILE ENOUGH
-        while(int j = 3 != 0){
+        while(int j = 3 != 0 || !success){
             if(8-birthday.size() <= 2){
               ret += first + last;
               ret[6] = date[0][0];
@@ -114,8 +139,14 @@ void Header::twoClause(string first, string last){
             }else{
 
             }
+            if(!validateGeneratedUsername(ret)){
+              break;
+              return;
+            }
             if(checkExist(ret) == true && sendtoUser(ret, givenName)){
               write(ret, givenName);
+              receipt(ret, givenName);
+              success = true;
               break;
               return;
             }
@@ -125,17 +156,25 @@ void Header::twoClause(string first, string last){
         int firstSize = first.size()-1;
         int lastSize = last.size();
         int lastTraverser = 0;
-        while(lastSize != 0){
+        while(lastSize != 0 || !success){
             for(int i = 0; i <= 7; i++){//fill up to first size only. 
               if(i <= firstSize){
                   ret[i] = first[i];
               }else{
-                  ret[i] = last[lastTraverser];
-                  lastTraverser++;
+                  if(lastTraverser <= last.size()){
+                      ret[i] = last[lastTraverser];
+                      lastTraverser++;
+                  }
               }          
             }
-            if(checkExist(ret) == true && sendtoUser(ret, givenName)){
+            if(!validateGeneratedUsername(ret)){
+              break;
+              return;
+            }
+            if(checkExist(ret) == true && sendtoUser(ret, givenName)){            
               write(ret, givenName);
+              receipt(ret, givenName);
+              success = true;
               break;
               return;
             }
@@ -143,7 +182,8 @@ void Header::twoClause(string first, string last){
           firstSize--;
           lastSize--;
         }
-    }    
-  cout<<"\n\nHello there, it seems like we're having trouble assigning you a username at this moment."<<endl;
-  cout<<"An admin with admin functions will assist you"<<endl;
+    }
+    if(!success){
+        errormsg();   
+    } 
 }
